@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-11">
+    <app-autofilter-dropdown
+      [entries$]="subCategories$"
+      (selectionChange)="updateFilters($event)"
+      placeholder="Select Sub Categories"
+    >
+    </app-autofilter-dropdown>
+    <app-autofilter-dropdown
+      [entries$]="categories$"
+      [(selection)]="category"
+      placeholder="Select Category"
+      [ngClass]="{'disabled-component': !subCategory.name}"
+    >
+    </app-autofilter-dropdown>
+    <select #difficulty id="difficultySelect">
+      <option>Select difficulty</option>
+      <option>Easy</option>
+      <option>Medium</option>
+      <option>Hard</option>
+    </select>
+    <button
+      class="primary"
+      id="createBtn"
+      (click)="createQuiz(category.id, difficulty.value)"
+    >
+      Create
+    </button>
+  </div>
+</div>
+<div class="row">
+  <app-quiz [questions]="questions$ | async"></app-quiz>
+</div>
